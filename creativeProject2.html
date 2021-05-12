@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <title>City Finder</title>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+
+
+    <link rel="stylesheet" type="text/css" href="theme.css">
+    <script>
+
+
+    $(document).ready(function(){
+      $("#cityField").keyup(function(){
+        var url="/getcity?q="+$("#cityField").val();
+        $.getJSON(url,function(data){
+          var everything;
+          everything="<ul>";
+          $.each(data,function(i,item){
+            everything+="<li> "+data[i].city+"</li>";
+          });
+          everything+="</ul>";
+          $("#txtHint").html(everything);
+        });
+        $("#txtHint").text("Keyup "+$("#cityField").val());  });
+
+        $("#weatherButton").click(function(e){
+          var value=$("#cityField").val();
+          console.log(value);
+          e.preventDefault();
+          $("#displayCity").text(value);
+            var myurl="https://api.wunderground.com/api/59aa2553932d655b/geolookup/conditions/q/Utah/";
+            myurl+=value;
+            myurl+=".json";
+            console.log(myurl);
+            $.ajax({
+              url : myurl,
+              dataType : "json",
+              success : function(parsed_json){
+                var location=parsed_json['location']['city'];
+                var temp_string=parsed_json['current_observation']['temperature_string'];
+                var current_weather=parsed_json['current_observation']['weather'];
+                everything="<ul>";
+                everything+="<li>Location: "+location;
+                everything+="<li>Temperature: "+temp_string;
+                everything+="<li>Weather: "+current_weather;
+                everything+="</ul>";
+                $("#weather").html(everything);
+              }
+            });
+        });
+        $('#searchWord').on('keydown', function(e) {
+            if (e.which == 13)
+            {
+              e.preventDefault();
+              $("#searchButton").click();
+            }
+        });
+
+        $("#searchButton").click(function(){
+          var url = "/word?w=";
+          url += $("#searchWord").val();
+          $.ajax({
+            url : url,
+            dataType : "json",
+            success : function(data)
+            {
+              console.log(data);
+              var search_results = "<ol>";
+              $.each(data, function(index, element)
+              {
+                search_results += "<li>";
+                search_results += "<div><strong>Word: </strong>" + $("#searchWord").val() + "</div>";
+                search_results += "<div><strong>POS: </strong>" + element.type + "</div>";
+                search_results += "<div><strong>Definition: </strong>" + element.defenition + "</div>";
+                search_results += "<div><strong>Example: </strong>" + element.example + "</div>";
+                search_results += "</li><br>";
+              });
+              search_results += "</ol>"
+              $("#searchWord").val("");
+              $("#searchResults").removeClass("text-center");
+              $("#searchResults").addClass("text-left");
+              $("#searchResults").html(search_results);
+            }
+          });
+        });
+    });
+    </script>
+  </head>
+
+    <body>
+    <div id="weatherrr">
+
+        <div id="enter">
+        <h1>Utah Weather</h1>
+                <h3> Suggest A city</h3>
+        <form>
+        Enter A Utah City: <input type="text" id="cityField" value=""><br>
+        Suggestion: <span id="txtHint">Empty</span>
+        <input id="weatherButton" type="submit" value="Submit">
+        </form>
+        </div>
+        <div id="city">
+        <h3>City</h3>
+        <textarea id="displayCity">No City</textarea>
+        </div>
+        <div id="weatherR">
+        <p>Current Weather</p>
+        <div id="weather">No weather</div>
+        </div>
+    </div>
+
+    <div class="Owlbot">
+      <div class="content">
+        <h1>
+          Owlbot Search
+        </h1>
+        <div class="search">
+          <form class="search-form">
+            <div class="input-group">
+              <input type="text" name="word" class="search-word" id="searchWord" placeholder="Enter Word Here">
+              <span class="input-group-btn">
+                  <button type="button" id="searchButton" class="btn btn-secondary search-so">Submit</button>
+              </span>
+            </div>
+          </form>
+        </div>
+        <div class="output">
+          <div class="text-center" id="searchResults">Type in a search term and hit submit to search owlbot. The search results will be displayed here.</div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </body>
+</html>

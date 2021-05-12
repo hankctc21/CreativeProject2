@@ -1,0 +1,95 @@
+#enter
+{
+  font-family: cursive;
+  background-color: powderblue;
+        border-radius: 25px;
+        border: 10px solid white;
+    padding: 20px;
+    margin-left: 5%;
+    top: auto;
+    top:20px;
+        width:30%;
+
+}
+#city
+{
+  font-family: cursive;
+  background-color: powderblue;
+        border-radius: 25px;
+        position: absolute;
+
+        border: 10px solid white;
+    padding: 20px;
+        margin-left: 40%;
+  top:20px;
+  opacity:0.9;
+}
+#weatherR
+{
+
+  font-family: cursive;
+  background-color: powderblue;
+        border-radius: 25px;
+        position: absolute;
+        right: auto;
+
+        border: 10px solid white;
+    padding: 20px;
+    margin-left: 60%;
+    top:20px;
+    opacity:0.9;
+}
+#weatherrr
+{   padding: 10px;
+    width:90%;
+  margin-bottom: 3%;
+  top:20px;
+
+  opacity:0.9;
+}
+
+.Owlbot{
+  padding: 10px;
+      width:90%;
+    margin-bottom: 3%;
+    top:20px;
+
+    opacity:0.9;
+}
+
+
+body{
+  background-image: url(http://wpnature.com/wp-content/uploads/2016/11/mountain-utah-ranges-landscape-scenic-wallpapers-high-resolution.jpg);
+
+}
+.Owlbot{
+  font-family: cursive;
+  background-color: powderblue;
+  opacity:0.9;
+
+
+    border:10px solid #7B68EE;
+    border-radius: 25px;
+  padding:10px;
+  margin:auto;
+  margin-bottom:3%;
+  width:90%
+}
+#searchResult{
+  text-align:left
+}#searchResults{
+  text-align:left
+}
+h1{
+  font-family: cursive;
+  font-style: italic;
+  text-align:center
+  }
+p{
+  text-align:left
+
+}
+form{
+  text-align:left
+
+}
